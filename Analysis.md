@@ -40,64 +40,14 @@ Where:
 
 ## 3. Results
 
-### Decision Tree using GINI
+![Decision tree Result](result.png)
 
-    ==== Decision Tree using GINI ====
-    maintenance = low : yes
-    maintenance != low
-    | capacity = 5 : yes
-    | capacity != 5
-    | | maintenance = high
-    | | | price = high : no
-    | | | price != high
-    | | | | price = low : no
-    | | | | price != low : no
-    | | maintenance != high
-    | | | price = low : no
-    | | | price != low
-    | | | | airbag = no : no
-    | | | | airbag != no
-    | | | | | price = high : yes
-    | | | | | price != high : yes
-    
-    Test Predictions: ['yes', 'yes']
-    Actual Labels:    ['yes', 'yes']
-    Accuracy: 1.0
-    Number of nodes in tree: 17
-    Training runtime: 0.0009961128 seconds
-
-**Observation:**  
+**Observation GINI:**  
 The GINI-based tree perfectly predicted the test data with 100% accuracy. The tree splits on `maintenance` first, followed by `capacity` and other attributes.
 
 ---
 
-### Decision Tree using ENTROPY
-
-    ==== Decision Tree using ENTROPY ====
-    maintenance = low : yes
-    maintenance != low
-    | price = low
-    | | maintenance = high : no
-    | | maintenance != high : no
-    | price != low
-    | | capacity = 2
-    | | | price = high : no
-    | | | price != high : no
-    | | capacity != 2
-    | | | airbag = no : no
-    | | | airbag != no
-    | | | | price = high
-    | | | | | maintenance = high : yes
-    | | | | | maintenance != high : yes
-    | | | | price != high : yes
-    
-    Test Predictions: ['no', 'yes']
-    Actual Labels:    ['yes', 'yes']
-    Accuracy: 0.5
-    Number of nodes in tree: 17
-    Training runtime: 0.0009994507 seconds
-
-**Observation:**  
+**Observation Information Gain (Entropy):**  
 The ENTROPY-based tree was less accurate on the test data (50%). It also splits first on `maintenance`, but then chooses `price` and `capacity` differently, which leads to one wrong prediction.
 
 ---
